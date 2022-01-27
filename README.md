@@ -1,15 +1,10 @@
-# Basic Sample Hardhat Project
+# NFT Marketplace on MATIC Testnet
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts.
+[Source](https://dev.to/dabit3/building-scalable-full-stack-apps-on-ethereum-with-polygon-2cfb)
 
-Try running some of the following tasks:
+## NB/Gotchas:
+a) When deploying with `npx hardhat run scripts/deploy` be sure to update your deployment addresses in `config.js`
 
-```shell
-npx hardhat accounts
-npx hardhat compile
-npx hardhat clean
-npx hardhat test
-npx hardhat node
-node scripts/sample-script.js
-npx hardhat help
-```
+b) Create a .env and populate it with your `POLYGON_ENDPOINT` (usually from Infura) and `PRIVATE_KEY` from Metamask under your account settings
+
+c) If you receive a `Error: MetaMask - RPC Error: Internal JSON-RPC error` then ensure your wallet and codebase are using the same Mumbai RPC Testnet
