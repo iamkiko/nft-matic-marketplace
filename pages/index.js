@@ -19,7 +19,9 @@ export default function Home() {
   // talk to smart contract in below function
   async function loadNFTs() {
     // create a generic provider and query for unsold market items
-    const provider = new ethers.providers.JsonRpcProvider(); // it's read only
+    const provider = new ethers.providers.JsonRpcProvider(
+      "https://matic-mumbai.chainstacklabs.com"
+    ); // it's read only
     const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider); // configure the contract
     const marketContract = new ethers.Contract(
       nftmarketaddress,

@@ -14,7 +14,7 @@ const client = ipfsHttpClient("https://ipfs.infura.io:5001/api/v0");
 import { nftaddress, nftmarketaddress } from "../config";
 
 import NFT from "../artifacts/contracts/NFT.sol/NFT.json";
-import Market from "../artifacts/contracts/Market.sol/NFTMarket.json";
+import Market from "../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
 
 export default function CreateItem() {
   const [fileUrl, setFileUrl] = useState(null);
@@ -38,7 +38,7 @@ export default function CreateItem() {
     }
   }
 
-  async function createMarket() {
+  async function createItem() {
     const { name, description, price } = formInput;
     if (!name || !description || !price || !fileUrl) return;
     // first, upload to IPFS
@@ -67,8 +67,8 @@ export default function CreateItem() {
     let contract = new ethers.Contract(nftaddress, NFT.abi, signer);
     let transaction = await contract.createToken(url);
     let tx = await transaction.wait();
-    let event = tx.events[0];
-    let value = event.args[2];
+    let event = tx.events[0]; // returns an events array
+    let value = event.args[2]; // events returns an args [] -> 3rd item is the id
     let tokenId = value.toNumber();
     const price = ethers.utils.parseUnits(formInput.price, "ether");
 
@@ -111,7 +111,7 @@ export default function CreateItem() {
         <input type="file" name="Asset" className="my-4" onChange={onChange} />
         {fileUrl && <img className="rounded mt-4" width="350" src={fileUrl} />}
         <button
-          onClick={createMarket}
+          onClick={createItem}
           className="font-bold mt-4 bg-pink-500 text-white rounded p-4 shadow-lg"
         >
           Create Digital Asset
